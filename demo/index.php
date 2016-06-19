@@ -130,49 +130,6 @@ if( !$accessToken ) {
 <body>
 	<div class="container">
 	
-<?php
-
-
-/*
-if( $accessToken ) {
-	// Logged in
-	echo '
-<h1>Facebook session found</h3>
-<h3>Access Token</h3>';
-	var_dump($accessToken->getValue());
-	
-	// The OAuth 2.0 client handler helps us manage access tokens
-	$oAuth2Client = $FBService->getOAuth2Client();
-	
-	// Get the access token metadata from /debug_token
-	$tokenMetadata = $oAuth2Client->debugToken($accessToken);
-	echo '
-<h3>Metadata</h3>';
-	var_dump($tokenMetadata);
-	
-	// Validation (these will throw FacebookSDKException's when they fail)
-	$tokenMetadata->validateAppId(FACEBOOK_APP_ID); // Replace {app-id} with your app id
-	// If you know the user ID this access token belongs to, you can validate it here
-	//$tokenMetadata->validateUserId('123');
-	$tokenMetadata->validateExpiration();
-	
-	if (! $accessToken->isLongLived()) {
-		// Exchanges a short-lived access token for a long-lived one
-		try {
-			$accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-		} catch (Facebook\Exceptions\FacebookSDKException $e) {
-			echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
-			exit;
-		}
-	
-		echo '
-<h3>Long-lived</h3>';
-		var_dump($accessToken->getValue());
-	}
-}
-*/
-?>
-		
 		<h1>Facebook Login</h1>
 		<p class="lead">
 			Test for facebook login.
@@ -183,18 +140,7 @@ if( $accessToken ) {
 			echo '
 				<h3>User is logged in</h3>';
 			
-			//https://developers.facebook.com/tools/debug/accesstoken/
-		// 	echo '
-		// 		<h6>Token</h6>
-		// 		'.$accessToken.'<br>';
-			
 			try {
-				// Returns a `Facebook\FacebookResponse` object
-		// 		$response = $FBService->get('/me?fields=email,id,name', $accessToken);
-				
-		// // 		$response = $FBService->get('/me?fields=id,name', $accessToken);
-		// // 		var_dump($response);echo '<br>';
-		// 		$user = $response->getGraphUser();
 				$user = $FBService->getUser('name,picture,gender');
 // 				var_dump($user);echo '<br>';
 				$picture = $user->getPicture();
