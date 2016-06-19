@@ -7,7 +7,7 @@
 	],
 	"autoload" : {
 		"psr-4" : {
-			"Orpheus\\Web\\Facebook\\" : "../../git/orpheus-facebook/src"
+			"Orpheus\\Web\\Facebook\\" : "src"
 		}
 	},
 	"type" : "library",
