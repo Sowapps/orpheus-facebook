@@ -16,8 +16,9 @@ $PackageLoader	= require_once VENDORPATH.'/autoload.php';
  
 // require_once '../../git/orpheus-facebook/src/';
 
-define('FACEBOOK_APP_ID',		'1000307813379593');
-define('FACEBOOK_APP_SECRET',	'46f13c2bb029dfee1becb6739d5234e1');
+// *** USE YOURS ***
+// define('FACEBOOK_APP_ID',		'');
+// define('FACEBOOK_APP_SECRET',	'');
 
 use Orpheus\Web\Facebook\FacebookService;
 
