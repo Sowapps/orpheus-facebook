@@ -7,8 +7,8 @@
 	],
 	"autoload" : {
 		"psr-4" : {
-			"Orpheus\\Web\\Facebook\\" : "src"
-		}
+			"Orpheus\\" : "src"
+		},
 	},
 	"type" : "library",
 	"license" : "MIT",
