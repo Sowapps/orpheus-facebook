@@ -14,8 +14,9 @@ use Facebook\GraphNodes\GraphUser;
 class FacebookService extends Facebook {
 	
 	const ALBUM_TYPE_PROFILE		= 'profile';
-	protected static $initialized	= false;
-	protected static $facebook;
+	
+// 	protected static $initialized	= false;
+	protected static $service;
 	
 	public function __construct(array $config = array()) {
 		$config += array(
@@ -133,6 +134,13 @@ class FacebookService extends Facebook {
 	public function getLoginUrl($redirectUrl, array $scope = array(), $separator = '&') {
 		$helper = $this->getRedirectLoginHelper();
 		return $helper->getLoginUrl($redirectUrl, $scope, $separator);
+	}
+	
+	public function getService() {
+		if( !static::$service ) {
+			static::$service = new static();
+		}
+		return static::$service;
 	}
 	
 // 	public function __construct($accessToken = null, SignedRequest $signedRequest = null) {
