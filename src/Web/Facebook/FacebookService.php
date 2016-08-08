@@ -136,7 +136,7 @@ class FacebookService extends Facebook {
 		return $helper->getLoginUrl($redirectUrl, $scope, $separator);
 	}
 	
-	public function getService() {
+	public static function getService() {
 		if( !static::$service ) {
 			static::$service = new static();
 		}
