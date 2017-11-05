@@ -14,7 +14,8 @@
 	"license" : "MIT",
 	"require" : {
 		"php" : ">=5.6",
-		"facebook/php-sdk-v4" : "^5.0"
+		"facebook/graph-sdk" : "~5.0",
+		"orpheus/orpheus-inputcontroller" : "dev-master"
 	},
 	"authors" : [{
 			"name" : "Florent HAZARD",
@@ -22,5 +23,6 @@
 			"homepage" : "http://sowapps.com",
 			"role" : "Developer"
 		}
-	]
+	],
+	"minimum-stability" : "dev"
 }
