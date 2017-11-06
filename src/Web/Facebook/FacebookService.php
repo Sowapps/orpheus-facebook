@@ -2,6 +2,7 @@
 
 namespace Orpheus\Web\Facebook;
 
+use Exception;
 use Facebook\Facebook;
 use Facebook\GraphNodes\GraphUser;
 
@@ -21,18 +22,30 @@ class FacebookService extends Facebook {
 		parent::__construct($config);
 	}
 	
+	/**
+	 * Get the access token
+	 * 
+	 * @return string
+	 */
 	public function getAccessToken() {
 		return isset($_SESSION['fb_access_token']) ? $_SESSION['fb_access_token'] : null;
 	}
 	
+	/**
+	 * Test if user is connected with facebook on this app
+	 * 
+	 * @throws Exception
+	 * @return boolean
+	 */
 	public function isUserConnected() {
 		if( session_status() !== PHP_SESSION_ACTIVE ) {
-			throw new \Exception('Require the session started to check if user is connected');
+			throw new Exception('Require the session started to check if user is connected');
 		}
 		return !!$this->getAccessToken();
 	}
 	
 	/**
+	 * Get the current user
 	 * 
 	 * @param string[]|string|null $fields
 	 * @return GraphUser
@@ -40,7 +53,7 @@ class FacebookService extends Facebook {
 	public function getUser($fields=null) {
 		$accessToken = $this->getAccessToken();
 		if( !$accessToken ) {
-			throw new \Exception('User is not connected');
+			throw new Exception('User is not connected');
 		}
 		// Returns a `Facebook\FacebookResponse` object
 		/* @var Facebook\FacebookResponse $response */
@@ -49,9 +62,14 @@ class FacebookService extends Facebook {
 		return $response->getGraphUser();
 	}
 	
+	/**
+	 * Disconnect the logged user
+	 * 
+	 * @throws Exception
+	 */
 	public function disconnectUser() {
 		if( session_status() !== PHP_SESSION_ACTIVE ) {
-			throw new \Exception('Require the session started to disconnect user');
+			throw new Exception('Require the session started to disconnect user');
 		}
 		unset($_SESSION['fb_access_token']);
 	}
@@ -62,6 +80,12 @@ class FacebookService extends Facebook {
 	 * True only if the use is just connnected
 	 */
 	protected $connectedUser = null;
+	
+	/**
+	 * Connect the user using the facebook api
+	 * 
+	 * @return boolean|\Facebook\Authentication\AccessToken
+	 */
 	public function connectUser() {
 		if( $this->connectedUser !== null ) {
 			return $this->connectedUser;
@@ -103,6 +127,11 @@ class FacebookService extends Facebook {
 		return $helper->getLoginUrl($redirectUrl, $scope, $separator);
 	}
 	
+	/**
+	 * Get the singleton service
+	 * 
+	 * @return FacebookService
+	 */
 	public static function getService() {
 		if( !static::$service ) {
 			static::$service = new static();
