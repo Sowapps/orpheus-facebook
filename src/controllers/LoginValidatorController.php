@@ -16,12 +16,6 @@ class LoginValidatorController extends HTTPController {
 	public function run(HTTPRequest $request) {
 		
 		try {
-			/**
-			 * error_code=1349048
-			 * error_message=Impossible+de+charger+cette+URL%3A+Le+domaine+de+cette+URL+n’est+pas+inscrit+dans+ceux+de+l’application.+Pour+pouvoir+importer+cette+URL%2C+ajoutez+tous+les+domaines+et+sous-domaines+de+votre+application+au+champ+Domaines+des+paramètres+de+l’application.
-			 * state=65632690931dc05b346fd112a18d6f30
-			 * @var \Orpheus\Web\Facebook\FacebookService $FBService
-			 */
 			if( $request->hasParameter('error_code') ) {
 				$errorCode = $request->getParameter('error_code');
 				$errorMessage = $request->getParameter('error_message');
@@ -29,6 +23,7 @@ class LoginValidatorController extends HTTPController {
 				return;
 			}
 			
+			/* @var \Orpheus\Web\Facebook\FacebookService $FBService */
 			$FBService = new FacebookService();
 
 			if( $FBService->connectUser() ) {
