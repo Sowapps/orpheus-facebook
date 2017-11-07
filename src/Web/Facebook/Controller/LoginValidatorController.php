@@ -2,6 +2,8 @@
 
 namespace Orpheus\Web\Facebook\Controller;
 
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
 use Orpheus\InputController\HTTPController\HTTPController;
 use Orpheus\InputController\HTTPController\HTTPRequest;
 use Orpheus\InputController\HTTPController\RedirectHTTPResponse;
@@ -20,25 +22,26 @@ class LoginValidatorController extends HTTPController {
 				$errorCode = $request->getParameter('error_code');
 				$errorMessage = $request->getParameter('error_message');
 				echo 'Facebook Error ('.$errorCode.')<br />'.text2HTML($errorMessage);
-				return;
+				die();
 			}
 			
 			/* @var \Orpheus\Web\Facebook\FacebookService $FBService */
 			$FBService = new FacebookService();
-
+			
 			if( $FBService->connectUser() ) {
 				return $this->getValidReponse($request);
 			}
-		
-		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+			
+		} catch(FacebookResponseException $e) {
 			// When Graph returns an error
 			echo 'Graph returned an error: '.$e;
-		
-		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+			
+		} catch(FacebookSDKException $e) {
 			// When validation fails or other local issues
 			echo 'Facebook SDK returned an error: '.$e;
 		}
 		
+		die();
 	}
 	
 	/**
@@ -58,6 +61,6 @@ class LoginValidatorController extends HTTPController {
 	public function getInvalidReponse(HTTPRequest $request, \Exception $exception) {
 		return new RedirectHTTPResponse(DEFAULTROUTE);
 	}
-
+	
 	
 }
