@@ -1,6 +1,6 @@
 <?php
 
-namespace Orpheus\Web\Facebook;
+namespace Orpheus\Web\Facebook\Controller;
 
 use Orpheus\InputController\HTTPController\HTTPController;
 use Orpheus\InputController\HTTPController\HTTPRequest;
