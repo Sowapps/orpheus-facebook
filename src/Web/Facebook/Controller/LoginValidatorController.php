@@ -7,6 +7,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use Orpheus\InputController\HTTPController\HTTPController;
 use Orpheus\InputController\HTTPController\HTTPRequest;
 use Orpheus\InputController\HTTPController\RedirectHTTPResponse;
+use Orpheus\Web\Facebook\FacebookService;
 
 class LoginValidatorController extends HTTPController {
 	
