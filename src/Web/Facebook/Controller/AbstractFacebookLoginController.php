@@ -8,8 +8,9 @@ use Orpheus\InputController\HTTPController\HTTPController;
 use Orpheus\InputController\HTTPController\HTTPRequest;
 use Orpheus\InputController\HTTPController\RedirectHTTPResponse;
 use Orpheus\Web\Facebook\FacebookService;
+use Facebook\GraphNodes\GraphUser;
 
-class LoginValidatorController extends HTTPController {
+abstract class AbstractFacebookLoginController extends HTTPController {
 	
 	/**
 	 * @param HTTPRequest $request The input HTTP request
@@ -22,14 +23,18 @@ class LoginValidatorController extends HTTPController {
 			if( $request->hasParameter('error_code') ) {
 				$errorCode = $request->getParameter('error_code');
 				$errorMessage = $request->getParameter('error_message');
-				echo 'Facebook Error ('.$errorCode.')<br />'.text2HTML($errorMessage);
-				die();
+				return $this->getErrorReponse($errorCode, $errorMessage);
 			}
 			
 			/* @var \Orpheus\Web\Facebook\FacebookService $FBService */
-			$FBService = new FacebookService();
+			$fbService = new FacebookService();
 			
-			if( $FBService->connectUser() ) {
+			if( $fbService->connectUser() ) {
+				
+				/* @var \Facebook\GraphNodes\GraphUser $fbUser */
+				$fbUser	= $fbService->getUser('id,name,email,picture.type(large)');
+				$this->connectUser($fbUser);
+				
 				return $this->getValidReponse($request);
 			}
 			
@@ -42,6 +47,13 @@ class LoginValidatorController extends HTTPController {
 			echo 'Facebook SDK returned an error: '.$e;
 		}
 		
+		die();
+	}
+	
+	public abstract function connectUser(FacebookService $fbService, GraphUser $fbUser);
+	
+	public function getErrorReponse($errorCode, $errorMessage) {
+		echo 'Facebook Error ('.$errorCode.')<br />'.text2HTML($errorMessage);
 		die();
 	}
 	
