@@ -6,8 +6,10 @@ use Exception;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\GraphNodes\GraphUser;
+use Orpheus\InputController\HttpController\HtmlHttpResponse;
 use Orpheus\InputController\HTTPController\HTTPController;
 use Orpheus\InputController\HTTPController\HTTPRequest;
+use Orpheus\InputController\HttpController\HttpResponse;
 use Orpheus\InputController\HTTPController\RedirectHTTPResponse;
 use Orpheus\Web\Facebook\FacebookService;
 
@@ -17,13 +19,14 @@ abstract class AbstractFacebookLoginController extends HTTPController {
 	 * @param HTTPRequest $request The input HTTP request
 	 * @see HTTPController::run()
 	 */
-	public function run($request) {
+	public function run($request): HttpResponse {
 		
 		try {
 			if( $request->hasParameter('error_code') ) {
 				$errorCode = $request->getParameter('error_code');
 				$errorMessage = $request->getParameter('error_message');
-				return $this->getErrorReponse($errorCode, $errorMessage);
+				
+				return $this->getErrorResponse($errorCode, $errorMessage);
 			}
 			
 			$fbService = new FacebookService();
@@ -48,9 +51,10 @@ abstract class AbstractFacebookLoginController extends HTTPController {
 		die();
 	}
 	
-	public function getErrorReponse($errorCode, $errorMessage) {
-		echo 'Facebook Error (' . $errorCode . ')<br />' . text2HTML($errorMessage);
-		die();
+	public function getErrorResponse($errorCode, $errorMessage): HtmlHttpResponse {
+		return new HtmlHttpResponse('Facebook Error (' . $errorCode . ')<br />' . text2HTML($errorMessage));
+		//		echo 'Facebook Error (' . $errorCode . ')<br />' . text2HTML($errorMessage);
+		//		die();
 	}
 	
 	public abstract function connectUser(FacebookService $fbService, GraphUser $fbUser);
