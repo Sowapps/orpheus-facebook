@@ -7,17 +7,17 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\GraphNodes\GraphUser;
 use Orpheus\InputController\HttpController\HtmlHttpResponse;
-use Orpheus\InputController\HTTPController\HTTPController;
-use Orpheus\InputController\HTTPController\HTTPRequest;
+use Orpheus\InputController\HttpController\HttpController;
+use Orpheus\InputController\HttpController\HttpRequest;
 use Orpheus\InputController\HttpController\HttpResponse;
-use Orpheus\InputController\HTTPController\RedirectHTTPResponse;
+use Orpheus\InputController\HttpController\RedirectHttpResponse;
 use Orpheus\Web\Facebook\FacebookService;
 
-abstract class AbstractFacebookLoginController extends HTTPController {
+abstract class AbstractFacebookLoginController extends HttpController {
 	
 	/**
-	 * @param HTTPRequest $request The input HTTP request
-	 * @see HTTPController::run()
+	 * @param HttpRequest $request The input HTTP request
+	 * @see HttpController::run()
 	 */
 	public function run($request): HttpResponse {
 		
@@ -60,20 +60,20 @@ abstract class AbstractFacebookLoginController extends HTTPController {
 	public abstract function connectUser(FacebookService $fbService, GraphUser $fbUser);
 	
 	/**
-	 * @param HTTPRequest $request The input HTTP request
-	 * @return RedirectHTTPResponse
-	 * @see HTTPController::run()
+	 * @param HttpRequest $request The input HTTP request
+	 * @return RedirectHttpResponse
+	 * @see HttpController::run()
 	 */
 	public function getValidResponse($request) {
-		return new RedirectHTTPResponse(DEFAULTROUTE);
+		return new RedirectHttpResponse(DEFAULTROUTE);
 	}
 	
 	/**
-	 * @param HTTPRequest $request The input HTTP request
-	 * @see HTTPController::run()
+	 * @param HttpRequest $request The input HTTP request
+	 * @see HttpController::run()
 	 */
 	public function getInvalidResponse($request, Exception $exception) {
-		return new RedirectHTTPResponse(DEFAULTROUTE);
+		return new RedirectHttpResponse(DEFAULTROUTE);
 	}
 	
 	
