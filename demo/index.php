@@ -5,15 +5,15 @@ ini_set("display_errors", 1);
 
 session_start();
 
-define('VENDORPATH',	dirname(__DIR__).'/vendor');
+define('VENDOR_PATH', dirname(__DIR__) . '/vendor');
 
-// echo VENDORPATH.'/autoload.php<br>';
-if( !file_exists(VENDORPATH.'/autoload.php') ) {
+// echo VENDOR_PATH.'/autoload.php<br>';
+if( !file_exists(VENDOR_PATH . '/autoload.php') ) {
 	throw new Exception('Unable to find vendor autoload, check composer.');
 }
-$PackageLoader	= require_once VENDORPATH.'/autoload.php';
+$PackageLoader = require_once VENDOR_PATH . '/autoload.php';
 // $PackageLoader->add('Orpheus\\Web\\Facebook\\', '../../orpheus-facebook/src/');
- 
+
 // require_once '../../git/orpheus-facebook/src/';
 
 // *** USE YOURS ***
