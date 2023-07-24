@@ -17,12 +17,12 @@
   ],
   "autoload": {
 	"psr-4": {
-	  "Orpheus\\": "src"
+	  "Orpheus\\": "src/"
 	}
   },
   "require": {
 	"php": ">=5.6",
 	"facebook/graph-sdk": "~5.0",
-	"orpheus/orpheus-inputcontroller": "1.*"
+	  "orpheus/orpheus-inputcontroller": "4.*"
   }
 }

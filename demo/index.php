@@ -123,19 +123,19 @@ if( !$accessToken ) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Orpheus Facebook</title>
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css" />
 	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
 </head>
 <body>
-	<div class="container">
+<div class="container">
 	
-		<h1>Facebook Login</h1>
-		<p class="lead">
-			Test for facebook login.
-			<a href="https://developers.facebook.com/docs/facebook-login/web" target="_blank">Documentation</a>
-		</p>
+	<h1>Facebook Login</h1>
+	<p class="lead">
+		Test for facebook login.
+		<a href="https://developers.facebook.com/docs/facebook-login/web" target="_blank">Documentation</a>
+	</p>
 		<?php
 		if( $accessToken ) {
 			echo '
@@ -196,14 +196,15 @@ window.fbAsyncInit = function() {
 	if( d.getElementById(id) ) {
 		return;
 	}
-	js = d.createElement(s); js.id = id;
+	js = d.createElement(s);
+	js.id = id;
 	js.src = "//connect.facebook.net/en_US/sdk.js";
 	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+}(document, "script", "facebook-jssdk"));
 </script>
 </div>
-	<!-- External JS libraries -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- External JS libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
 </body>
 </html>
