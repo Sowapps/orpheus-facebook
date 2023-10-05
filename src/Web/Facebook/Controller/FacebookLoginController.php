@@ -13,10 +13,12 @@ use Orpheus\InputController\HttpController\HttpResponse;
 use Orpheus\InputController\HttpController\RedirectHttpResponse;
 use Orpheus\Web\Facebook\FacebookService;
 
-abstract class AbstractFacebookLoginController extends HttpController {
+abstract class FacebookLoginController extends HttpController {
 	
 	/**
 	 * @param HttpRequest $request The input HTTP request
+	 * @return HttpResponse
+	 * @throws Exception
 	 * @see HttpController::run()
 	 */
 	public function run($request): HttpResponse {
@@ -52,8 +54,8 @@ abstract class AbstractFacebookLoginController extends HttpController {
 	}
 	
 	public function getErrorResponse($errorCode, $errorMessage): HtmlHttpResponse {
-		return new HtmlHttpResponse('Facebook Error (' . $errorCode . ')<br />' . text2HTML($errorMessage));
-		//		echo 'Facebook Error (' . $errorCode . ')<br />' . text2HTML($errorMessage);
+		return new HtmlHttpResponse('Facebook Error (' . $errorCode . ')<br />' . html($errorMessage));
+		//		echo 'Facebook Error (' . $errorCode . ')<br />' . html($errorMessage);
 		//		die();
 	}
 	
@@ -65,7 +67,7 @@ abstract class AbstractFacebookLoginController extends HttpController {
 	 * @see HttpController::run()
 	 */
 	public function getValidResponse($request) {
-		return new RedirectHttpResponse(DEFAULTROUTE);
+		return new RedirectHttpResponse(DEFAULT_ROUTE);
 	}
 	
 	/**
@@ -73,7 +75,7 @@ abstract class AbstractFacebookLoginController extends HttpController {
 	 * @see HttpController::run()
 	 */
 	public function getInvalidResponse($request, Exception $exception) {
-		return new RedirectHttpResponse(DEFAULTROUTE);
+		return new RedirectHttpResponse(DEFAULT_ROUTE);
 	}
 	
 	
